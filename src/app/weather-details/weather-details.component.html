@@ -1,9 +1,17 @@
 <div
-  class="card"
+  class="card card-main"
   style="height: 400px"
   [ngStyle]="{ 'background-image': findBackgroundImg() }"
 >
-  <div class="card-body">
+  <!-- <div class="card-body"> -->
+  <div
+    class="card-body clickable"
+    *ngIf="isStartup"
+    (click)="isStartup = false"
+  >
+    <h1 style="color: white" class="display-1">+</h1>
+  </div>
+  <div class="card-body" *ngIf="!isStartup">
     <div class="form-group search" *ngIf="!weatherData">
       <!-- <label style="color: white" for="city-name">City name</label> -->
       <input
@@ -33,4 +41,5 @@
       </div>
     </div>
   </div>
+  <!-- </div> -->
 </div>

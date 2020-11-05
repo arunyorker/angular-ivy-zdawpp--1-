@@ -5,6 +5,9 @@
 .error {
   color: white;
 }
+.clickable {
+  cursor: pointer;
+}
 
 .search {
   position: absolute;
@@ -15,4 +18,17 @@
   left: 0;
   width: 200px;
   height: 200px;
+}
+.card:hover {
+  -webkit-transform: scale(1.15);
+  -moz-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  -o-transform: scale(1.15);
+  transform: scale(1.15);
+  box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+  transition: all 0.3s ease;
+  border: 2px solid darkcyan;
+}
+.card {
+  transition: all 0.3s ease;
 }

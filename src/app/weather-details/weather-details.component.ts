@@ -1,6 +1,6 @@
 import { Component, OnDestroy,  OnInit } from "@angular/core";
 import { Subscription, timer } from "rxjs";
-import { flatMap} from "rxjs/operators";
+import { mergeMap} from "rxjs/operators";
 import { WeatherService } from "../weather.service";
 
 @Component({
@@ -13,16 +13,20 @@ export class WeatherDetailsComponent implements OnInit,OnDestroy {
   weatherData: any;
   isError: boolean = false;
   isFound: boolean = false;
+  isStartup:boolean = false;
   subscription: Subscription;
   constructor(private weatherService: WeatherService) {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isStartup = true;
+  }
+  
   getWeatherData() {
     console.log("get")
     this.subscription = timer(0,30*1000)
     .pipe(
-        flatMap(() => this.weatherService.getCurrentWeather(this.city))
+      mergeMap(() => this.weatherService.getCurrentWeather(this.city))
     )
  .subscribe((data: any) => {
       this.weatherData = data;
