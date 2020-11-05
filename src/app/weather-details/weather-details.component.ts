@@ -1,5 +1,5 @@
 import { Component, OnDestroy,  OnInit } from "@angular/core";
-import { Observable,interval, Subscribable, Subscription, timer } from "rxjs";
+import { Subscription, timer } from "rxjs";
 import { flatMap} from "rxjs/operators";
 import { WeatherService } from "../weather.service";
 
@@ -31,13 +31,13 @@ export class WeatherDetailsComponent implements OnInit,OnDestroy {
       this.isError = false;
       this.isFound = true;
       console.log("city updsated")
-      localStorage.setItem('city',JSON.stringify(this.weatherData));
+      localStorage.setItem(`city-${this.city}`,JSON.stringify(this.weatherData));
     },(error)=> {
       if(error.status === 404) {
       this.isError = true;
       }
-      if(error.status === 0) {
-      this.weatherData= JSON.parse(localStorage.getItem("city"));
+      else if(!navigator.onLine) {
+      this.weatherData= localStorage.getItem(`city-${this.city}`) ? JSON.parse(localStorage.getItem(`city-${this.city}`)): "";
       }
     });
   }
