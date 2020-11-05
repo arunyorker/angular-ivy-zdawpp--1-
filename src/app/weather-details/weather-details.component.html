@@ -1,0 +1,20 @@
+<div class="card" style="height:400px " [ngStyle]="{'background-image': findBackgroundImg()}">
+	<div class="card-body">
+		<div class="form-group search" *ngIf="!weatherData">
+			<!-- <label style="color: white" for="city-name">City name</label> -->
+			<input class="lead" style="color: white;background-color: transparent;border:none" type="text" placeholder="Add City & press Enter" (keyup.enter)="getWeatherData()" class="form-control" [(ngModel)]="city">
+			<!-- <button (click)="getWeatherData()" class="btn btn-primary">Submit</button> -->
+		</div>
+		<div *ngIf="isError">
+			<span class="lead error">Please enter correct City name</span> </div>
+		<div *ngIf="weatherData">
+			<div class=" bottom">
+				<h1 class="display-1">{{weatherData?.main?.temp}}</h1>
+				<h2 class="display-4">{{weatherData?.weather[0]?.main}}</h2>
+				<span class="display-4">{{weatherData?.name}}</span>
+				<p class="lead edit" (click)="clear();">Edit City</p>
+				<!-- <h2 class="display-4">{{weatherData.weather[0].description}}</h2> -->
+				<div>
+				</div>
+			</div>
+		</div>
